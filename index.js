@@ -25,8 +25,8 @@ const setInput = async (page, selector, value) => {
 };
 
 const run = async () => {
-  // i = 0;
-  // while (i < 2) {
+  i = 0;
+  // while (true) {
     const { browser, page } = await connect({
       headless: false,
       args: [],
@@ -87,20 +87,17 @@ const run = async () => {
       await setInput(pageTab, "#url", url);
       await pageTab.click("button[type='submit']");
       await new Promise((r) => setTimeout(r, 10000));
-            // await page.screenshot({ path: `screen.png`, fullPage: true });
-
-      // await pageTab.screenshot({ path: `screen_${i + 1}.png`, fullPage: true });
-      await pageTab.screenshot({ path: `screen.png`, fullPage: true });
-      // i++;
-      // console.log(`Email com sucesso: ${email} - ${i}/${num_browsers}`);
-      // if (i >= num_browsers) {
-      //   break;
-      // }
+      await pageTab.screenshot({ path: `screen_${i + 1}.png`, fullPage: true });
+      i++;
+      console.log(`Email com sucesso: ${email} - ${i}/${num_browsers}`);
+      if (i >= num_browsers) {
+        break;
+      }
     } catch (e) {
-      console.log(e);
-      // await browser.close();
-    } finally {
+      console.log("erro");
       await browser.close();
+    } finally {
+      // await browser.close();
     }
   // }
 };
