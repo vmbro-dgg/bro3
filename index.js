@@ -101,7 +101,6 @@ const run = async () => {
       // await browser.close();
     } finally {
       // await browser.close();
-      await browser.close();
     }
   // }
 };
