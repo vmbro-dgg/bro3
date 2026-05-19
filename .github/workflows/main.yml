@@ -1,49 +1,49 @@
-name: Nodejs
+# name: Nodejs
 
-on:
-  push:
-    branches: ["main"]
-  schedule:
-    - cron: "20 */1 * * *"
-  workflow_dispatch:
+# on:
+#   push:
+#     branches: ["main"]
+#   schedule:
+#     - cron: "20 */1 * * *"
+#   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      # max-parallel: 3
-      matrix:
-        id: [1,2,3,4,5]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#       # max-parallel: 3
+#       matrix:
+#         id: [1,2,3,4,5]
 
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout código
+#         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+#       - name: Configurar Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "20"
 
-      - name: Instalar dependências
-        run: npm ci
+#       - name: Instalar dependências
+#         run: npm ci
 
-      - name: Executar node index.js
-        env:
-          URL_BROWSER: ${{ secrets.URL_BROWSER }}
-          URL: ${{ secrets.URL }}
-          MINUTOS: ${{ secrets.MINUTOS }}
-          NUM_BROWSERS: ${{ secrets.NUM_BROWSERS }}
-          URL_EMAIL: ${{ secrets.URL_EMAIL }}
-          SENHA: ${{ secrets.SENHA }}
-        timeout-minutes: 59
-        continue-on-error: true
-        run: xvfb-run --auto-servernum -- node --trace-warnings index.js
+#       - name: Executar node index.js
+#         env:
+#           URL_BROWSER: ${{ secrets.URL_BROWSER }}
+#           URL: ${{ secrets.URL }}
+#           MINUTOS: ${{ secrets.MINUTOS }}
+#           NUM_BROWSERS: ${{ secrets.NUM_BROWSERS }}
+#           URL_EMAIL: ${{ secrets.URL_EMAIL }}
+#           SENHA: ${{ secrets.SENHA }}
+#         timeout-minutes: 59
+#         continue-on-error: true
+#         run: xvfb-run --auto-servernum -- node --trace-warnings index.js
 
-      - name: Upload da captura
-        uses: actions/upload-artifact@v4
-        if: success() || failure()
-        with:
-          name: screenshot-${{ matrix.id }}
-          path: "*.png"
-          if-no-files-found: ignore
+#       - name: Upload da captura
+#         uses: actions/upload-artifact@v4
+#         if: success() || failure()
+#         with:
+#           name: screenshot-${{ matrix.id }}
+#           path: "*.png"
+#           if-no-files-found: ignore
