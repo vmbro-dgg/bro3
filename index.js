@@ -3,10 +3,10 @@ const { connect } = require("puppeteer-real-browser");
 const url_browser = process.env.URL_BROWSER;
 const url_email = process.env.URL_EMAIL;
 const url = process.env.URL;
-const minutos = parseInt(process.env.MINUTOS);
-const num_browsers = parseInt(process.env.NUM_BROWSERS) || 1;
-const delay = 10;
 const senha = process.env.SENHA;
+const minutos = parseInt(process.env.MINUTOS);
+const num_browsers = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+const delay = 10;
 
 const setInput = async (page, selector, value) => {
   await page.$eval(
