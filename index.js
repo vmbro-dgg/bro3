@@ -91,9 +91,9 @@ const run = async () => {
       // await pageTab.screenshot({ path: `screen_${i + 1}.png`, fullPage: true });
       // i++;
       // console.log(`Email com sucesso: ${email} - ${i}/${num_browsers}`);
-      if (i >= num_browsers) {
-        break;
-      }
+      // if (i >= num_browsers) {
+      //   break;
+      // }
     } catch (e) {
       console.log("erro");
       await browser.close();
